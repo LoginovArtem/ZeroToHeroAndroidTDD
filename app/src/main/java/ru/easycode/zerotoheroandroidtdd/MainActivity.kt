@@ -12,33 +12,37 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
 
     lateinit var textView: TextView
+    lateinit var button: Button
+    private var clicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val rl = findViewById<LinearLayout>(R.id.rootLayout)
         textView = findViewById(R.id.titleTextView)
-        val button = findViewById<Button>(R.id.removeButton)
+        button = findViewById<Button>(R.id.removeButton)
+
 
         if (savedInstanceState != null ) {
             val isDeleted = savedInstanceState.getBoolean("visibilityGone")
-            val isClickable = savedInstanceState.getBoolean("clickable")
+            val isClicked = savedInstanceState.getBoolean("clickable")
             if (isDeleted) {
                 rl.removeView(textView)
-                button.isEnabled = isClickable
+                button.isEnabled = !isClicked
             }
         }
 
         button.setOnClickListener {
             rl.removeView(textView)
             button.isEnabled = false
+            clicked = true
         }
 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("visibilityGone", true)
-        outState.putBoolean("clickable", false)
+        outState.putBoolean("visibilityGone", clicked)
+        outState.putBoolean("clickable", clicked)
     }
 
 }
