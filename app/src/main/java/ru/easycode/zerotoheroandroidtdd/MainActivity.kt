@@ -19,21 +19,22 @@ class MainActivity : AppCompatActivity() {
         rootLayout = findViewById(R.id.rootLayout)
         textView = findViewById(R.id.countTextView)
         val button = findViewById<Button>(R.id.incrementButton)
+        val count = Count.Base(2)
 
         button.setOnClickListener {
-            textView.text = "" + (textView.text.toString().toInt() + 2)
+            textView.text = count.increment(textView.text.toString())
         }
 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("a", textView.text.toString().toInt())
+        outState.putString("a", textView.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        textView.text = savedInstanceState.getInt("a").toString()
+        textView.text = savedInstanceState.getString("a").toString()
     }
 
 }
