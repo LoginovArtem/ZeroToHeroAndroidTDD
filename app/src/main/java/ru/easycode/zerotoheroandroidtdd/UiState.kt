@@ -22,8 +22,8 @@ interface UiState : Serializable {
 
     data class ShowData(private val text: String) : UiState {
         override fun apply(textView: TextView, button: Button, progressBar: ProgressBar) {
-            textView.visibility = View.VISIBLE
             textView.text = text
+            textView.visibility = View.VISIBLE
             button.isEnabled = true
             progressBar.visibility = View.GONE
         }

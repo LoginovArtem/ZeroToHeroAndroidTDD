@@ -1,6 +1,5 @@
 package ru.easycode.zerotoheroandroidtdd
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,13 +16,9 @@ class MainViewModel(
 
     fun load() {
         liveDataWrapper.update(UiState.ShowProgress)
-        Log.d("wut", "progress visible")
         viewModelScope.launch {
-            Log.d("wut", "scope launched")
             val result = repository.load()
-            Log.d("wut", "result is simpleresponse(" + result.text + ")")
             liveDataWrapper.update(UiState.ShowData(result.text))
-            Log.d("wut", "ldw upd sD with text- " + result.text)
         }
     }
 
