@@ -2,6 +2,7 @@ package ru.easycode.zerotoheroandroidtdd
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.widget.addTextChangedListener
 import ru.easycode.zerotoheroandroidtdd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,10 @@ class MainActivity : AppCompatActivity() {
             val text = binding.inputEditText.text.toString()
             binding.titleTextView.text = text
             binding.inputEditText.text?.clear()
+        }
+
+        binding.inputEditText.addTextChangedListener {
+            binding.actionButton.isEnabled = binding.inputEditText.text.toString().length >= 3
         }
     }
 }
