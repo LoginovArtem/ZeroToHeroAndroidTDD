@@ -1,5 +1,6 @@
 package ru.easycode.zerotoheroandroidtdd
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,19 @@ class MyItemsAdapter : RecyclerView.Adapter<MyItemViewHolder>() {
     fun add(source: CharSequence) {
         itemsList.add(source)
         notifyItemInserted(itemsList.size - 1)
+    }
 
+    fun save(bundle: Bundle) {
+        bundle.putCharSequenceArrayList(KEY, itemsList)
+    }
+
+    fun restore(bundle: Bundle) {
+        itemsList.addAll(bundle.getCharSequenceArrayList(KEY)?:ArrayList())
+        notifyItemRangeInserted(0, itemsList.size)
+    }
+
+    companion object {
+        private const val KEY = "itemsKey"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyItemViewHolder {

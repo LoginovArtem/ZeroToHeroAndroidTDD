@@ -15,12 +15,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerView.adapter = MyItemsAdapter()
+        binding.recyclerView.adapter = myItemsAdapter
 
         binding.actionButton.setOnClickListener {
-            val text = binding.inputEditText.text.toString()
+            val text = binding.inputEditText.text.toString().lowercase()
             myItemsAdapter.add(text)
             binding.inputEditText.text?.clear()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        myItemsAdapter.save(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        myItemsAdapter.restore(savedInstanceState)
     }
 }
