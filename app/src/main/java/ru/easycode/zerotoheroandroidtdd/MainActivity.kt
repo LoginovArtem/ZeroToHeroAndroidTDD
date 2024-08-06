@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = myItemsAdapter
 
         binding.actionButton.setOnClickListener {
-            val text = binding.inputEditText.text.toString().lowercase()
+            val text = binding.inputEditText.text.toString().lowercase() // testing on physical device
             myItemsAdapter.add(text)
             binding.inputEditText.text?.clear()
         }
